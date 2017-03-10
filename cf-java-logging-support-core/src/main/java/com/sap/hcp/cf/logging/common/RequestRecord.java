@@ -1,5 +1,6 @@
 package com.sap.hcp.cf.logging.common;
 
+import java.io.Closeable;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -31,7 +32,7 @@ import com.fasterxml.jackson.jr.ob.comp.ObjectComposer;
  * 
  *
  */
-public class RequestRecord {
+public class RequestRecord implements Closeable {
 
 	/*
 	 * -- default values for request fields that are marked as "required"
@@ -183,6 +184,7 @@ public class RequestRecord {
 		return endMs;
 	}
 
+	@Override
 	public void close() {
 		RequestRecordHolder.remove(this);
 	}
